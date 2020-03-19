@@ -1,0 +1,25 @@
+<project name='antpr' default='run'>
+    <target name='clean'>
+      <delete dir='build'/>
+    </target>
+
+    <target name='compile' depends='clean'>
+      <echo> java compile task </echo>
+	  <mkdir dir='build/classes'/>
+      <javac srcdir='src' destdir='build/classes'/>
+    </target>
+
+    <target name='package' depends='compile'>
+      <echo> java package task </echo>
+      <jar basedir='build/classes' destfile='build/jar/Hello.jar'>
+     <manifest>
+      <attribute name='Main-class' value='Hello1'/>
+     </manifest>
+	 </jar>
+    </target>
+
+    <target name='run' depends='package'>
+      <echo> hello from run target </echo>
+	  <java jar='build/jar/Hello.jar' fork='true'/>
+    </target>
+</project>	
